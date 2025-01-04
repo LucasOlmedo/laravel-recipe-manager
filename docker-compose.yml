@@ -1,11 +1,11 @@
 services:
   api:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     container_name: api
     volumes:
-      - .:/var/www/html
+      - ./backend:/var/www/html
     working_dir: /var/www/html
     ports:
       - "9000:9000"
@@ -22,7 +22,7 @@ services:
     container_name: nginx
     volumes:
       - .:/var/www/html
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf      
+      - ./backend/nginx.conf:/etc/nginx/conf.d/default.conf      
     ports:
       - "8000:80"
     networks:
@@ -32,9 +32,8 @@ services:
     image: mysql:8.0
     container_name: db
     restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    env_file:
+      - ./backend/.env
     ports:
       - "3306:3306"
     volumes:
