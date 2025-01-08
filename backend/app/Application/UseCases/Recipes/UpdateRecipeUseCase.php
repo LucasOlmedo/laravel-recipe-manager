@@ -12,6 +12,19 @@ class UpdateRecipeUseCase
 
     public function execute(Recipe $recipe, array $data): Recipe
     {
+        $recipe = $this->updateRecipeEntity($recipe, $data);
+        return $this->recipeRepository->update($recipe);
+    }
+
+    private function updateRecipeEntity(Recipe $recipe, array $data): Recipe
+    {
+        $recipe->title = $data['title'] ?? $recipe->title;
+        $recipe->description = $data['description'] ?? $recipe->description;
+        $recipe->preparationTime = $data['preparation_time'] ?? $recipe->preparationTime;
+        $recipe->steps = $data['steps'] ?? $recipe->steps;
+        $recipe->ingredients = $data['ingredients'] ?? $recipe->ingredients;
+        $recipe->tags = $data['tags'] ?? $recipe->tags;
+        $recipe->imageUrl = $data['image_url'] ?? $recipe->imageUrl;
         return $recipe;
     }
 }

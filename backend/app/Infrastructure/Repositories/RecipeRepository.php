@@ -40,7 +40,9 @@ class RecipeRepository implements RecipeRepositoryInterface
 
     public function update(RecipeEntity $recipe): RecipeEntity
     {
-        return $recipe;
+        $model = $this->recipeMapper->toModel($recipe);
+        $model->update();
+        return $this->recipeMapper->toEntity($model);
     }
 
     public function delete(RecipeEntity $recipe): void

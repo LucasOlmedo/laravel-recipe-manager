@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Application\Services\RecipeService;
 use App\Http\Requests\CreateRecipeRequest;
+use App\Http\Requests\UpdateRecipeRequest;
 use App\Http\Resources\RecipeResource;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,10 @@ class RecipeController extends Controller
         return new RecipeResource($recipe);
     }
 
-    public function update() {}
+    public function update(int $id, UpdateRecipeRequest $request) {
+        $recipe = $this->recipeService->updateRecipe($id, $request->validated());
+        return new RecipeResource($recipe);
+    }
 
     public function destroy(int $id)
     {
