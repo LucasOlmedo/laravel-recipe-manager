@@ -19,7 +19,7 @@ class CreateRecipeUseCase
     {
         return new Recipe(
             id: null,
-            user_id: 1,
+            user_id: 1, // futurely will be the authenticated user
             title: $data['title'],
             description: $data['description'] ?? null,
             preparationTime: $data['preparation_time'] ?? null,

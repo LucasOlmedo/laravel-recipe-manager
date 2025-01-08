@@ -15,6 +15,7 @@ class RecipeRepository implements RecipeRepositoryInterface
 
     public function search(array $filters = []): array
     {
+        // filters not implemented
         return RecipeModel::all()
             ->map(fn(RecipeModel $model) => $this->recipeMapper->toEntity($model))
             ->toArray();
@@ -34,7 +35,6 @@ class RecipeRepository implements RecipeRepositoryInterface
     {
         $model = $this->recipeMapper->toModel($recipe);
         $model->save();
-
         return $this->recipeMapper->toEntity($model);
     }
 
@@ -45,6 +45,6 @@ class RecipeRepository implements RecipeRepositoryInterface
 
     public function delete(RecipeEntity $recipe): void
     {
-        return;
+        RecipeModel::destroy($recipe->id);
     }
 }
