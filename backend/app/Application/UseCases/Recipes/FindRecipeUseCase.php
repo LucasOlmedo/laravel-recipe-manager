@@ -2,14 +2,15 @@
 
 namespace App\Application\UseCases\Recipes;
 
+use App\Domain\Entities\Recipe;
 use App\Domain\Repositories\RecipeRepositoryInterface;
 
-class GetAllRecipesUseCase
+class FindRecipeUseCase
 {
     public function __construct(private RecipeRepositoryInterface $recipeRepository) {}
 
-    public function execute(array $filters): array
+    public function execute(int $id): Recipe
     {
-        return $this->recipeRepository->search(filters: $filters);
+        return $this->recipeRepository->find(id: $id);
     }
 }

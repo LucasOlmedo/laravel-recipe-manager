@@ -19,9 +19,9 @@ class RecipeMapper implements EntityMapperInterface
             $model->title,
             $model?->description,
             $model?->preparation_time,
-            $model->steps,
-            $model->ingredients,
-            $model?->tags,
+            json_decode($model->steps),
+            json_decode($model->ingredients),
+            json_decode($model?->tags),
             $model?->image_url,
             $model?->integration,
             $model?->integration_ref_id
@@ -34,13 +34,13 @@ class RecipeMapper implements EntityMapperInterface
             throw new \InvalidArgumentException('O objeto deve ser uma instância de Recipe');
 
         $model = RecipeModel::findOrNew($entity->id);
-        $model->id = $entity->id;
+        $model->user_id = $entity->user_id;
         $model->title = $entity->title;
         $model->description = $entity?->description;
         $model->preparation_time = $entity?->preparationTime;
-        $model->steps = $entity->steps;
-        $model->ingredients = $entity->ingredients;
-        $model->tags = $entity?->tags;
+        $model->steps = json_encode($entity->steps);
+        $model->ingredients = json_encode($entity->ingredients);
+        $model->tags = json_encode($entity?->tags);
         $model->image_url = $entity?->imageUrl;
         $model->integration = $entity?->integration;
         $model->integration_ref_id = $entity?->integrationRefId;

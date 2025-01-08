@@ -4,7 +4,7 @@ namespace App\Domain\Entities;
 
 class Recipe
 {
-    public int $id;
+    public ?int $id;
     public int $user_id;
     public string $title;
     public ?string $description;
@@ -17,7 +17,7 @@ class Recipe
     public ?string $integrationRefId;
 
     public function __construct(
-        int $id,
+        ?int $id,
         int $user_id,
         string $title,
         ?string $description,
